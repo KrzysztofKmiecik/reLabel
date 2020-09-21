@@ -20,7 +20,7 @@ public class Main extends Application {
         //  stage.setFullScreen(true);
         stage.setResizable(false);
         stage.initStyle(StageStyle.DECORATED);
-        stage.setOpacity(0.5);
+        stage.setOpacity(1);
 
         stage.setTitle("reLabel");
         stage.show();
