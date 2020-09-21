@@ -12,7 +12,7 @@ public class Main extends Application {
 
     @Override
     public void start(Stage stage) throws Exception {
-        BorderPane mainPane = FXMLLoader.load(getClass().getResource("/MainView.fxml"));
+        BorderPane mainPane = FXMLLoader.load(getClass().getResource("/FXML/MainView.fxml"));
         Scene scene = new Scene(mainPane);
         stage.setScene(scene);
 
