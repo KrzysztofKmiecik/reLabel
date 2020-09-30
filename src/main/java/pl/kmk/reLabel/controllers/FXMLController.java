@@ -5,29 +5,64 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import pl.javastart.hellofx.Utils.IpClient;
 
+import java.util.Arrays;
+import java.util.List;
+
 public class FXMLController {
+
+    List<String> list = Arrays.asList("124", "125");
 
     @FXML
     private Button startButton;
 
     @FXML
-    public void initialize(){
+    public void initialize() {
         startButton.setText("sendToFIS");
     }
+
+    /**
+     * FIS server  "10.235.241.235", 24401
+     * <p>
+     * Check if newid wasn't used
+     * request   BREQ|id=125|process=REFLASH|station=BMW_RM_REFLASH_1|newid=124
+     * response  BCNF|id=125|status=PASS|
+     * <p>
+     * Send
+     * request   BCMP|id=125|newid=124|station=BMW_RM_REFLASH_1|process=REFLASH|status=PASS|endmodel=11111111|errorcode=
+     * response  BACK|id=125|status=PASS
+     */
 
     @FXML
     public void sendToFis(ActionEvent actionEvent) {
         System.out.println("SEND TO FIS " + actionEvent.getClass().getCanonicalName());
 
-       try(IpClient ipClient = new IpClient()) {
-           final String actual = ipClient.sendAndReceiveIPMessage("10.235.241.235", 24364, "HandleGETSTATIONLIST|");
+        try (IpClient ipClient = new IpClient()) {
+            //  final String actual = ipClient.sendAndReceiveIPMessage("10.235.241.235", 24364, "HandleGETSTATIONLIST|");
 
-           System.out.println("FIS Response : " + actual);
+            String oldNumber = list.get(0);
+            String newNumber = list.get(1);
+
+
+            String message = "BREQ|id=" + oldNumber + "|process=REFLASH|station=BMW_RM_REFLASH_1|newid=" + newNumber;
+            String actual = ipClient.sendAndReceiveIPMessage("10.235.241.235", 24401, message);
+            System.out.println("FIS Response : " + actual);
+
+            if (actual.contains("status=PASS")) {
+                message = "BCMP|id=" + oldNumber + "|newid=" + newNumber + "|station=BMW_RM_REFLASH_1|process=REFLASH|status=PASS|endmodel=11111111|errorcode=";
+                actual = ipClient.sendAndReceiveIPMessage("10.235.241.235", 24401, message);
+                System.out.println("FIS Response : " + actual);
+            }
         } catch (Exception e) {
             e.printStackTrace();
         }
 
+       swap();
 
+    }
 
+    private void swap() {
+        String temp = list.get(0);
+        list.set(0, list.get(1));
+        list.set(1, temp);
     }
 }
