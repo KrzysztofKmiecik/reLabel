@@ -23,7 +23,9 @@ public class FXMLController {
 
     @FXML
     public void initialize() {
+
         startButton.setText("sendToFIS");
+        input2DCode.setText("aaaa");
     }
 
     /**

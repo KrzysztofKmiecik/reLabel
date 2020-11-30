@@ -34,7 +34,7 @@
       </MenuBar>
    </top>
    <center>
-      <TextField fx:id="input2DCode" onKeyTyped="#OnKeyTyped" prefHeight="144.0" prefWidth="600.0" BorderPane.alignment="CENTER">
+      <TextField fx:id="input2DCode" focusTraversable="false" onKeyTyped="#OnKeyTyped" prefHeight="144.0" prefWidth="600.0" promptText="scan" BorderPane.alignment="CENTER">
          <font>
             <Font size="48.0" />
          </font></TextField>
