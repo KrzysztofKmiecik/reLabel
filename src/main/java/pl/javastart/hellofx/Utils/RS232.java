@@ -11,7 +11,10 @@ import java.util.concurrent.TimeoutException;
 public class RS232 {
     private final NRSerialPort serial;
 
+
+
     public RS232(String port, int baudRate) {
+
         serial = new NRSerialPort(port, baudRate);
     }
 
@@ -23,12 +26,14 @@ public class RS232 {
         serial.disconnect();
     }
 
-    public void write(String data) throws IOException {
+    public void write(String data)  {
         try (DataOutputStream outs = new DataOutputStream(serial.getOutputStream());) {
             for (int i = 0; i < data.length(); i++) {
                 char c = data.charAt(i);
                 outs.write(c);
             }
+        }catch(IOException e){
+            System.out.println(e.getMessage());
         }
     }
 
@@ -43,13 +48,13 @@ public class RS232 {
                 }
             }
         } catch (Exception ex) {
-            ex.printStackTrace();
+            System.out.println(ex.getMessage());
         }
         return str;
     }
 
 
-    public String writeAndRead(String dataToWrite, char terminator, long timeoutMiliseconds) throws IOException, TimeoutException {
+    public String writeAndRead(String dataToWrite, char terminator, long timeoutMiliseconds) throws  TimeoutException {
         String responseStr = "";
         this.write(dataToWrite);
         //   System.out.println(addCharEnd("12345",'a'));
@@ -57,7 +62,7 @@ public class RS232 {
         return responseStr;
     }
 
-    private String read(String responseStr, char terminator, long timeoutMiliseconds) throws IOException, TimeoutException {
+    private String read(String responseStr, char terminator, long timeoutMiliseconds) throws TimeoutException {
         try (DataInputStream ins = new DataInputStream(serial.getInputStream())) {
             char b;
             long start = System.currentTimeMillis();
@@ -75,6 +80,8 @@ public class RS232 {
                 }
                 stop = System.currentTimeMillis();
             }
+        }catch(IOException e){
+            System.out.println(e.getMessage());
         }
         return responseStr;
     }
@@ -83,7 +90,7 @@ public class RS232 {
         try {
             Thread.sleep(millis);
         } catch (InterruptedException e) {
-            e.printStackTrace();
+            System.out.println(e.getMessage());
         }
     }
 

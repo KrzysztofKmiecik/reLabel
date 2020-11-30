@@ -17,7 +17,7 @@ class MyJsonTest {
 
         String expected="28114444";
         String current="";
-        Optional<CrossRef> apnToPrint = myJson.read("28112233");
+        Optional<CrossRef> apnToPrint = myJson.read("28112233","src/main/resources/CrossRefFile.json");
         if(apnToPrint.isPresent()){
             current=apnToPrint.get().getNewAPN();
 

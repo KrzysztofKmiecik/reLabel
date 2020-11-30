@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Menu?>
 <?import javafx.scene.control.MenuBar?>
 <?import javafx.scene.control.MenuItem?>
@@ -9,9 +9,12 @@
 <?import javafx.scene.text.Font?>
 
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pl.kmk.reLabel.controllers.FXMLController">
-   <bottom>
-      <Button fx:id="startButton" mnemonicParsing="false" onAction="#sendToFis" prefHeight="27.0" prefWidth="141.0" text="Button" BorderPane.alignment="CENTER" />
-   </bottom>
+    <center>
+        <TextField fx:id="input2DCode" onKeyTyped="#OnKeyTyped" prefHeight="144.0" prefWidth="600.0" promptText="scan" BorderPane.alignment="CENTER">
+            <font>
+                <Font size="48.0" />
+            </font></TextField>
+    </center>
    <top>
       <MenuBar BorderPane.alignment="CENTER">
         <menus>
@@ -33,10 +36,8 @@
         </menus>
       </MenuBar>
    </top>
-   <center>
-      <TextField fx:id="input2DCode" focusTraversable="false" onKeyTyped="#OnKeyTyped" prefHeight="144.0" prefWidth="600.0" promptText="scan" BorderPane.alignment="CENTER">
-         <font>
-            <Font size="48.0" />
-         </font></TextField>
-   </center>
+   <bottom>
+      <Label fx:id="myStatusLabel" prefHeight="127.0" prefWidth="605.0" text="Label" BorderPane.alignment="CENTER" />
+   </bottom>
+
 </BorderPane>

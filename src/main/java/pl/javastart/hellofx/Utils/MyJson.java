@@ -15,13 +15,13 @@ import java.util.Optional;
 
 public class MyJson {
 
-    public Optional<CrossRef> read(final String scannedAPN) throws IOException {
+    public Optional<CrossRef> read(final String scannedAPN,final String path) {
 
         //  String str = "[{\"currentAPN\": \"28112233\",\"newAPN\": \"28114444\"},{\"currentAPN\": \"28222233\",\"newAPN\": \"28224444\"}]";
 
         Gson gson = new Gson();
 
-        Reader reader = Files.newBufferedReader(Paths.get("src/main/java/pl/javastart/hellofx/Utils/CrossRefFile.json"));
+        try ( Reader reader = Files.newBufferedReader(Paths.get(path));){
 
         //  CrossRef crossRef=gson.fromJson(str,CrossRef.class);
         Type crossRefListType = new TypeToken<ArrayList<CrossRef>>() {
@@ -29,9 +29,16 @@ public class MyJson {
 
         List<CrossRef> crossRefList = gson.fromJson(reader, crossRefListType);
 
-        return crossRefList.stream()
-                .filter(p -> p.getCurrentAPN().equals(scannedAPN))
-                .findFirst();
+            return crossRefList.stream()
+                    .filter(p -> p.getCurrentAPN().equals(scannedAPN))
+                    .findFirst();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        return null;
+
     }
 
 

@@ -11,12 +11,16 @@ public class RS232Test {
         String str="";
         char terminator=Character.LINE_SEPARATOR;
         // "\n".charAt(0); //"\n".charAt(0)'';
+
         try {
             str = rs232.writeAndRead("OLAAAAAAAAAAAAAAAA",terminator,5000);
-        } catch (IOException | TimeoutException e) {
+        } catch (TimeoutException e) {
             e.printStackTrace();
         }
-        rs232.close();
-        System.out.println(str);
+
+
     }
+
+
+
 }
