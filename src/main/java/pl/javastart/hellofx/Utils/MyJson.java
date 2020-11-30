@@ -1,0 +1,38 @@
+package pl.javastart.hellofx.Utils;
+
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+
+import java.io.IOException;
+import java.io.Reader;
+import java.lang.reflect.Type;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
+
+
+public class MyJson {
+
+    public Optional<CrossRef> read(final String scannedAPN) throws IOException {
+
+        //  String str = "[{\"currentAPN\": \"28112233\",\"newAPN\": \"28114444\"},{\"currentAPN\": \"28222233\",\"newAPN\": \"28224444\"}]";
+
+        Gson gson = new Gson();
+
+        Reader reader = Files.newBufferedReader(Paths.get("src/main/java/pl/javastart/hellofx/Utils/CrossRefFile.json"));
+
+        //  CrossRef crossRef=gson.fromJson(str,CrossRef.class);
+        Type crossRefListType = new TypeToken<ArrayList<CrossRef>>() {
+        }.getType();
+
+        List<CrossRef> crossRefList = gson.fromJson(reader, crossRefListType);
+
+        return crossRefList.stream()
+                .filter(p -> p.getCurrentAPN().equals(scannedAPN))
+                .findFirst();
+    }
+
+
+    }

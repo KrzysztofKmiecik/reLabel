@@ -25,6 +25,7 @@ public class Main extends Application {
         stage.setTitle("reLabel");
         stage.show();
 
+
     }
 
     public static void main(String[] args) {

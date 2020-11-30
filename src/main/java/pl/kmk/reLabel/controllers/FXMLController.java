@@ -3,6 +3,9 @@ package pl.kmk.reLabel.controllers;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.control.TextField;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import pl.javastart.hellofx.Utils.IpClient;
 
 import java.util.Arrays;
@@ -14,6 +17,9 @@ public class FXMLController {
 
     @FXML
     private Button startButton;
+
+    @FXML
+    private TextField input2DCode;
 
     @FXML
     public void initialize() {
@@ -65,4 +71,17 @@ public class FXMLController {
         list.set(0, list.get(1));
         list.set(1, temp);
     }
+
+    public void OnKeyTyped(KeyEvent event) {
+
+        if(event.getCode().equals(KeyCode.ENTER) || event.getCharacter().getBytes()[0] == '\n' || event.getCharacter().getBytes()[0] == '\r'){
+
+            System.out.println("dane wprowadzone");
+            input2DCode.clear();
+
+        }
+
+    }
+
+
 }

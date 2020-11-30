@@ -4,13 +4,11 @@
 <?import javafx.scene.control.Menu?>
 <?import javafx.scene.control.MenuBar?>
 <?import javafx.scene.control.MenuItem?>
-<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.text.Font?>
 
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pl.kmk.reLabel.controllers.FXMLController">
-   <center>
-      <TextArea prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER" />
-   </center>
    <bottom>
       <Button fx:id="startButton" mnemonicParsing="false" onAction="#sendToFis" prefHeight="27.0" prefWidth="141.0" text="Button" BorderPane.alignment="CENTER" />
    </bottom>
@@ -35,4 +33,10 @@
         </menus>
       </MenuBar>
    </top>
+   <center>
+      <TextField fx:id="input2DCode" onKeyTyped="#OnKeyTyped" prefHeight="144.0" prefWidth="600.0" BorderPane.alignment="CENTER">
+         <font>
+            <Font size="48.0" />
+         </font></TextField>
+   </center>
 </BorderPane>
